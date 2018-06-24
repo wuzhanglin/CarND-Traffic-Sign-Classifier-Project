@@ -1,7 +1,14 @@
-# Traffic Sign Recognition Writeup
----
+# Self-Driving Car Project 2. Traffic Sign Recognition
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-## Build a Traffic Sign Classifier
+[TOC]
+
+## Overview
+In this project, we will use deep neural networks including convolutional neural networks to classify traffic signs. We will train and validate a model so it can classify traffic sign images using the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset). After the model is trained, we will then try out our model on images of German traffic signs that we find on the web.
+
+We have created an Ipython notebook that contains our code: [Traffic_Sign_Classifier.ipynb](https://github.com/wuzhanglin/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb).
+
+## The Project Goals
 The goals/steps of this project are the following:
 * Load the datasets
 * Explore, summarize and visualize the datasets
@@ -9,6 +16,13 @@ The goals/steps of this project are the following:
 * Use the model to make predictions on new images
 * Analyze the softmax probabilities of the new images
 * Summarize the results with a written report
+
+### Dependencies
+This lab requires:
+
+* [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
+
+The lab environment can be created with CarND Term1 Starter Kit. Click [here](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) for the details.
 
 ## Dataset Summary and Exploration
 
