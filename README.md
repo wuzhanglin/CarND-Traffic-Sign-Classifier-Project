@@ -1,8 +1,6 @@
 # Self-Driving Car Project 2. Traffic Sign Recognition
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-[TOC]
-
 ## Overview
 In this project, we will use deep neural networks including convolutional neural networks to classify traffic signs. We will train and validate a model so it can classify traffic sign images using the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset). After the model is trained, we will then try out our model on images of German traffic signs that we find on the web.
 
@@ -17,7 +15,7 @@ The goals/steps of this project are the following:
 * Analyze the softmax probabilities of the new images
 * Summarize the results with a written report
 
-### Dependencies
+## Dependencies
 This lab requires:
 
 * [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
@@ -26,7 +24,7 @@ The lab environment can be created with CarND Term1 Starter Kit. Click [here](ht
 
 ## Dataset Summary and Exploration
 
-#### 1. Basic Summary of the Datasets
+### 1. Basic Summary of the Datasets
 I used python, numpy and pandas library to calculate summary statistics of the traffic sign datasets:
 * The size of the training set is 34799
 * The size of the validation set is 4410
@@ -34,16 +32,16 @@ I used python, numpy and pandas library to calculate summary statistics of the t
 * The shape of a traffic sign image is (32, 32, 3)
 * The number of unique classes/labels in the dataset is 43
 
-#### 2. Exploratory Visualization of the Dataset
+### 2. Exploratory Visualization of the Dataset
 Here is an exploratory visualization of the training set. It is a bar chart showing how the data is distributed in the training set:
 
 ![Traffic Sign Distribution of the Training Dataset](writeup-images/training-dataset-distribution.png)
 
 ## Design and Test the Model Architecture
 
-#### 1. Image Pre-processing and Augmenting
+### 1. Image Pre-processing and Augmenting
 
-##### 1.1 Image Grayscaling and Normalization 
+#### 1.1 Image Grayscaling and Normalization 
 As a first step, I decided to convert the images to grayscale to improve the performance of the traffic sign classifier. A traffic sign can be identified by its shape or direction without the color, for example, a traffic sign that specifies "ahead only" can be easily identified by the straight arrow that points ahead. In some level the colors of the image can be seen as noises for the model. By converting RGB color images to grayscale images will greatly reduce the size of the data, which eventually improves the performance of the model.
 
 There is a published document discussing about that using grayscale images instead of color increases the capacity of the network at:
@@ -61,7 +59,7 @@ Here is an example of a traffic sign image before and after grayscaling and zero
 
 ![Turn Left Ahead RGB](writeup-images/turn-left-ahead-rgb.png) ![Turn Left Ahead Grayscale](writeup-images/turn-left-ahead-grayscale.png)
 
-##### 1.2 Image  Augmenting
+#### 1.2 Image  Augmenting
 I decided to generate additional data because it will provide more valid data for the training, and make the model more focused on the actual features, which eventually makes the model more accurate.
 
 To add more data to the the datasets, I used the following techniques because it will drop the noises and help the model to focus on the actual features:
@@ -87,7 +85,7 @@ In the end, with all the augmented images, the datasets increased by a lot. The 
 * The size of the validation set is 22050
 * The size of the test set is 63150
 
-#### 2. Model Architecture
+### 2. Model Architecture
 Here is a list of layers in the model architecture including model type, layers, layer sizes, connectivity, and etc. The model consisted of the following layers:
 
 | Layer           | Description                                 |
@@ -104,7 +102,7 @@ Here is a list of layers in the model architecture including model type, layers,
 | Fully Connected | Outputs 128                                 |
 | Softmax         | Outputs 43                                  |
 
-#### 3. Optimizer and Hyperparameters 
+### 3. Optimizer and Hyperparameters 
 To train the model, I used the AdamOptimizer. The hyperparameters that I used are:
 
 | Hyperparameter | Value |
@@ -113,9 +111,9 @@ To train the model, I used the AdamOptimizer. The hyperparameters that I used ar
 | Batch Size     | 64    |
 | Learning Rate  | 0.001 |
 
-#### 4. Training the Model
+### 4. Training the Model
 
-##### 4.1 Final Results
+#### 4.1 Final Results
 Here is the results of my final model:
 
 | Dataset        | Accuracy |
@@ -124,7 +122,7 @@ Here is the results of my final model:
 | Validation Set | 95.8%    |
 | Test Set       | 93.7%    |
 
-##### 4.2 LeNet as the Starting Point
+#### 4.2 LeNet as the Starting Point
 LetNet is well known and comprehensive neural network model to start with. It's also easier to build using TensorFlow. It uses Convolutional Networks which have a great performance for image classification.
 
 This article discussed about that using Convolutional Networks for traffic sign classification has a very good performance:
@@ -134,10 +132,10 @@ So as a start, I used the LeNet model directly to classify the the original imag
 
 After that, I tried other several adjustments on the model to improve the accuracy as described in following, and got some better results as you see in the final results table above.
 
-##### 4.3 Improvement Using Grayscaling and Normalization
+#### 4.3 Improvement Using Grayscaling and Normalization
 Using grayscale images instead of color images made the accuracy increased by 0.5% ~ 1%. Well using the normalization brought in another slight incensement by less than 0.5%, not as much as expected, but it does have a positive impact. This is a topic that is worth more study for me.
 
-##### 4.4 Experiment on the Hyperparameters
+#### 4.4 Experiment on the Hyperparameters
 At the beginning, the hyperparameters that I used are:
 
 | Hyperparameter | Value |
@@ -162,15 +160,15 @@ Here is an overall summary on my experiments with the hyperparameters:
 | Batch Size     | 128 -> 64     | Increase    | More time           | 64           |
 | Learning Rate  | 0.01 -> 0.001 | More smooth | More time           | 0.001        |
 
-##### 4.5 Training with Augmented Images
+#### 4.5 Training with Augmented Images
 Surprisingly, adding the augmented images to the datasets has a much more positive impact on the accuracy than adjusting the hyperparameters. After using the augmented images, the accuracy increased by about 1.5% ~ 2.5%, which is a really good achievement considering what we've got with the hyperparameter experiments.
 
-##### 4.6 Summary
+#### 4.6 Summary
 Finally, by adding the augmented images and with the chosen hyperparameters on the adjusted LeNet model, I got validation accuracy at 95.8%, and a test accuracy at 93.7%.
 
 ## Test the Model on New Images
 
-#### 1. New Images
+### 1. New Images
 Here are five German traffic signs (80x80x3) downloaded from the web:
 
 ![Test Image 1 - Slippery Road](traffic_sign_test_images-origin/slippery-road.png) ![Test Image 2 - No Entry](traffic_sign_test_images-origin/no-entry.png)  ![Test Image 3 - Speed Limit 60km Per Hour)](traffic_sign_test_images-origin/speed-limit-60km-per-hour.png)  ![Test Image 4 - Go Straight or Right)](traffic_sign_test_images-origin/go-straight-or-right.png)  ![Test Image 5 - Ahead Only)](traffic_sign_test_images-origin/ahead-only.png)
@@ -181,7 +179,7 @@ The third image might be difficult to classify because it's a little bit too blu
 
 All the images have colors, and the sizes don't match the model, so I manually scaled them into (32x32x3) color images, and then use python code to convert them into (32 x 32 x 1) grayscale images with zero-centered normalization before the actual classification.
 
-#### 2. Predictions
+### 2. Predictions
 Here are the results of the predictions:
 
 | Test Image   | Ground Truth         | Prediction           |
@@ -194,7 +192,7 @@ Here are the results of the predictions:
 
 The model was able to correctly predict all the 5 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of 93.7%.
 
-#### 3. Certainty of the Predictions 
+### 3. Certainty of the Predictions 
 
 The code for making the predictions on my final model is located in the section "Output Top 5 Softmax Probabilities For Each Image Found on the Web" in the Ipython notebook. The cell with the python code is marked as "In [48]". Not sure why it is not following the indexing of the cells, it's probably following the order of how I run the cells. Notice, I have saved the model after the training and testing, and then made some small clean up on the code for dataset visualization and pre-processing. At the end, I loaded up the the saved model and then made the predictions.
 
